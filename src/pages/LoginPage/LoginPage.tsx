@@ -3,22 +3,26 @@ import { AppButton } from "../../components/UI/AppButton/AppButton";
 import { AppInput } from "../../components/UI/AppInput/AppInput";
 import { Heading } from "../../components/UI/Heading/Heading";
 import "./LoginPage.scss";
+import { SLoginPage } from "./Loginpage.style";
 
 export const LoginPage = () => {
   return (
-    <div className="LoginPage">
-      <Heading headingText="Авторизация" headingType="h1"/>
+    <SLoginPage>
+      <Heading headingText="Авторизация" headingType="h1" />
       <form action="#">
         <AppInput inputValue="" placeholder="Номер телефона" type="tel" />
-        <AppInput inputValue="" placeholder="Пароль" type="password"/>
-       <AppButton buttonText="Войти" isDisabled/>
+        <AppInput inputValue="" placeholder="Пароль" type="password" />
+        <AppButton buttonText="Войти" isDisabled={false} />
       </form>
       <a href="#">Забыли пароль?</a>
-    <RegistrationInfo 
-    path="/registration-page"
-    registrationText="У вас нет аккаунта?"
-    loginText="Зарегестрироваться"
-    enterText="Войти с помощью"/>
-    </div>
+
+      {/* Передаем необходимые пропсы в RegistrationInfo */}
+      <RegistrationInfo
+        path="/registration-page"
+        registrationText="У вас нет аккаунта?"
+        loginText="Зарегистрироваться"
+        enterText="Войти с помощью"
+      />
+    </SLoginPage>
   );
 };

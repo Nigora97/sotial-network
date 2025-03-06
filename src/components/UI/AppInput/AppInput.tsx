@@ -1,3 +1,5 @@
+import { SAppInput } from "./AppInput.style";
+
 interface IAppInputProps {
 type: "tel"|"password"|"username",
 placeholder: string;
@@ -11,7 +13,7 @@ export const AppInput = ({
     placeholder,
     type,
 }: IAppInputProps) => {
-    return  ( <input 
+    return  ( <SAppInput
             type= {type} 
             placeholder= {placeholder} 
             onChange= {inputChange}
