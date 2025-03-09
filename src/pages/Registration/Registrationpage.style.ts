@@ -13,9 +13,7 @@ export const SRegistrationPage = styled.div`
     h1 {
       margin-bottom: 50px;
     }
-  
-   
-  
+    
     button {
       width: 100%;
       margin-bottom: 30px;

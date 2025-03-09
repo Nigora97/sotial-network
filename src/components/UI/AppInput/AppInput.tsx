@@ -1,22 +1,19 @@
-import { SAppInput } from "./AppInput.style";
+import { ErrorMessage, SAppInput } from "./AppInput.style";
 
-interface IAppInputProps {
-type: "tel"|"password"|"username",
-placeholder: string;
-inputValue: string;
-inputChange?: () => void;
+interface IAppInputProps extends React.InputHTMLAttributes<HTMLInputElement>{
+isError: boolean;
+errorMessage?: string;
 }
 
 export const AppInput = ({
-    inputValue, 
-    inputChange, 
-    placeholder,
-    type,
+    isError,
+    errorMessage,
+    ...props
 }: IAppInputProps) => {
-    return  ( <SAppInput
-            type= {type} 
-            placeholder= {placeholder} 
-            onChange= {inputChange}
-            value= {inputValue}/>
-    );
+    return  (
+        <div>
+<SAppInput  {...props}/>
+{isError && <ErrorMessage>{errorMessage}</ErrorMessage>}
+        </div>
+    ) 
 };

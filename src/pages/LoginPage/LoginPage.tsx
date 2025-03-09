@@ -2,16 +2,73 @@ import { RegistrationInfo } from "../../components/RegistrationInfo/Registration
 import { AppButton } from "../../components/UI/AppButton/AppButton";
 import { AppInput } from "../../components/UI/AppInput/AppInput";
 import { Heading } from "../../components/UI/Heading/Heading";
-import "./LoginPage.scss";
 import { SLoginPage } from "./Loginpage.style";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller, useForm, SubmitHandler } from "react-hook-form";
+
+interface IloginForm {
+  userEmail: string;
+  userPassword: string;
+}
+
+const loginScheme = yup.object({
+  userEmail: yup.string().email("Введите почту корректно").required(),
+  userPassword: yup.string().min(4, "Минимум 4 цифры").required(),
+});
 
 export const LoginPage = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginScheme),
+    mode: "onBlur",
+    defaultValues: {
+      userEmail: "",
+      userPassword: "",
+    },
+  });
+
+  const onLoginSubmit: SubmitHandler<IloginForm> = (data) => {
+    const payload = {
+      useremail: data.userEmail,
+      userpassword: data.userPassword,
+    }
+    console.log(payload)
+  }
+
   return (
     <SLoginPage>
       <Heading headingText="Авторизация" headingType="h1" />
-      <form action="#">
-        <AppInput inputValue="" placeholder="Номер телефона" type="tel" />
-        <AppInput inputValue="" placeholder="Пароль" type="password" />
+      <form action="#" onSubmit = {handleSubmit(onLoginSubmit)}>
+        <Controller 
+        name="userEmail"
+        control={control}
+        render={({field})=>(
+          <AppInput 
+          isError={errors.userEmail ? true : false}
+          errorMessage={errors.userEmail?.message}
+          placeholder="Введите свою почту"
+           type="email" 
+           {...field}/>
+        )}
+        />
+        <Controller 
+        name="userPassword"
+        control={control}
+        render={({field})=>(
+          <AppInput 
+          isError={errors.userPassword ? true : false}
+          errorMessage={errors.userPassword?.message}
+          placeholder="Пароль"
+           type="password" 
+           {...field}
+           />
+        )}
+        />
+       
         <AppButton buttonText="Войти" isDisabled={false} />
       </form>
       <a href="#">Забыли пароль?</a>

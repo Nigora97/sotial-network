@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const SRegistrationinfo = styled.div`
   margin-top: 30px;
   padding-top: 20px;
